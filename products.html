@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Products - iDexter Gh</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+</head>
+<body>
+    <header><h1>Our Products</h1></header>
+    <main>
+        <div class="product">
+            <h3>Placeholder Product 1</h3>
+            <p>Price: GHS 100</p>
+            <button onclick="payWithPaystack('Placeholder Product 1', 10000)">Buy Now</button>
+        </div>
+        <div class="product">
+            <h3>Placeholder Product 2</h3>
+            <p>Price: GHS 150</p>
+            <button onclick="payWithPaystack('Placeholder Product 2', 15000)">Buy Now</button>
+        </div>
+    </main>
+    <script>
+    function payWithPaystack(productName, amount) {
+        var handler = PaystackPop.setup({
+            key: 'pk_live_6ed3d69c843affe9b303f50bbed0aecb6a42f442',
+            email: 'idextergh@gmail.com',
+            amount: amount,
+            currency: 'GHS',
+            ref: '' + Math.floor((Math.random() * 1000000000) + 1),
+            label: productName,
+            callback: function(response) {
+                alert('Payment complete! Reference: ' + response.reference);
+            },
+            onClose: function() {
+                alert('Transaction was cancelled');
+            }
+        });
+        handler.openIframe();
+    }
+    </script>
+</body>
+</html>
